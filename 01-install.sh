@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Load configuration options
-OPT_INSTALL_DISK=/dev/sda
+OPT_INSTALL_DISK="/dev/sda"
 OPT_BOOT_PART=${OPT_INSTALL_DISK}1
 OPT_ROOT_PART=${OPT_INSTALL_DISK}2
 OPT_MOUNT_OPTIONS="compress-force=zstd:1,noatime"
@@ -25,9 +25,9 @@ setfont ter-v18n
 # | /var/cache/pacman/pkg | /dev/sda2/@pkg  |
 
 # Configure partitions
-sgdisk --zap-all {$OPT_INSTALL_DISK}
-sgdisk --new=1::+1G --typecode=1:ef00 --change-name=1:'EFI System Partition' {$OPT_INSTALL_DISK}
-sgdisk --new=2::-0 --typecode=2:8300 --change-name=2:'Root Partition' {$OPT_INSTALL_DISK}
+sgdisk --zap-all ${OPT_INSTALL_DISK}
+sgdisk --new=1::+1G --typecode=1:ef00 --change-name=1:'EFI System Partition' ${OPT_INSTALL_DISK}
+sgdisk --new=2::-0 --typecode=2:8300 --change-name=2:'Root Partition' ${OPT_INSTALL_DISK}
 
 
 # Format BTRFS partition and mount it
