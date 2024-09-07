@@ -5,6 +5,8 @@ OPT_INSTALL_DISK="/dev/sda"
 OPT_BOOT_PART=${OPT_INSTALL_DISK}1
 OPT_ROOT_PART=${OPT_INSTALL_DISK}2
 OPT_MOUNT_OPTIONS="compress-force=zstd:1,noatime"
+OPT_HOSTNAME="torment"
+OPT_TIMEZONE="America/Chicago"
 
 # Set the terminal font
 setfont ter-v18n
@@ -62,36 +64,6 @@ pacstrap -K /mnt base base-devel linux linux-firmware amd-ucode terminus-font
 
 # Generate the filesystem table (fstab)
 genfstab -U /mnt >> /mnt/etc/fstab
-
-# Install the bootloader
-bootctl --root=/mnt install
-
-# Grab the partition UUID for the root partition
-ROOT_UUID=$(blkid -s PARTUUID -o value ${OPT_ROOT_PART})
-
-# Configure the primary bootloader config
-cat <<EOF > /mnt/boot/loader/entries/arch.conf
-title Arch Linux
-linux /vmlinuz-linux
-initrd /amd-ucode.img
-initrd /initramfs-linux.img
-options root=PARTUUID=${ROOT_UUID} rootflags=subvol=@ rw
-EOF
-
-# Configure the fallback bootloader config
-cat <<EOF > /mnt/boot/loader/entries/arch-fallback.conf
-title Arch Linux Fallback
-linux /vmlinuz-linux
-initrd /amd-ucode.img
-initrd /initramfs-linux-fallback.img
-options root=PARTUUID=${ROOT_UUID} rootflags=subvol=@ rw
-EOF
-
-# Configure systemd-boot
-cat <<EOF > /mnt/boot/loader/loader.conf
-default arch
-timeout 5
-EOF
 
 # Copy mirrorlist to new system
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist

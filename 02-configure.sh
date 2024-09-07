@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-OPT_HOSTNAME="torment"
-OPT_TIMEZONE="America/Chicago"
-
 # Set the root password
 passwd
 
@@ -33,3 +30,33 @@ pacman --sync --noconfirm man-db man-pages
 
 # Setup basic tools
 pacman --sync --noconfirm vim git curl
+
+# Install the bootloader
+bootctl install
+
+# Grab the partition UUID for the root partition
+ROOT_UUID=$(blkid -s PARTUUID -o value ${OPT_ROOT_PART})
+
+# Configure the primary bootloader config
+cat <<EOF > /boot/loader/entries/arch.conf
+title Arch Linux
+linux /vmlinuz-linux
+initrd /amd-ucode.img
+initrd /initramfs-linux.img
+options root=PARTUUID=${ROOT_UUID} rootflags=subvol=@ rw
+EOF
+
+# Configure the fallback bootloader config
+cat <<EOF > /boot/loader/entries/arch-fallback.conf
+title Arch Linux Fallback
+linux /vmlinuz-linux
+initrd /amd-ucode.img
+initrd /initramfs-linux-fallback.img
+options root=PARTUUID=${ROOT_UUID} rootflags=subvol=@ rw
+EOF
+
+# Configure systemd-boot
+cat <<EOF > /boot/loader/loader.conf
+default arch
+timeout 5
+EOF
