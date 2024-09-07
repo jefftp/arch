@@ -44,7 +44,7 @@ umount /mnt
 
 # Mount BTRFS subvolumes
 mount -o ${OPT_MOUNT_OPTIONS},subvol=@ ${OPT_ROOT_PART} /mnt
-mkdir -p /mnt/{boot,home,var/log,var/cache/pacman/pkg}
+mkdir -p /mnt/{boot,home,var/log,var/cache/pacman/pkg,.snapshots}
 mount -o ${OPT_MOUNT_OPTIONS},subvol=@home ${OPT_ROOT_PART} /mnt/home
 mount -o ${OPT_MOUNT_OPTIONS},subvol=@log ${OPT_ROOT_PART} /mnt/var/log
 mount -o ${OPT_MOUNT_OPTIONS},subvol=@pkg ${OPT_ROOT_PART} /mnt/var/cache/pacman/pkg
