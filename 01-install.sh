@@ -57,7 +57,7 @@ mkfs.fat -F 32 ${OPT_BOOT_PART}
 mount ${OPT_BOOT_PART} /mnt/boot
 
 # Setup the mirror list
-reflector --country us --age 48 --protocol https --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
+reflector --country us --age 72 --protocol https --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist
 
 # Bootstrap the system
 pacstrap -K /mnt base base-devel linux linux-firmware amd-ucode terminus-font
