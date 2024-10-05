@@ -10,11 +10,11 @@ passwd
 echo "$HOSTNAME" > /etc/hostname
 
 # Configure timezone
-ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
+ln --symbolic --force "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc
 
 # Configure Locale
-sed -i '/^#en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
+sed --in-place '/^#en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
 locale-gen
 echo 'LANG=en_US.UTF-8' > /etc/locale.conf
 echo FONT=ter-v18n > /etc/vconsole.conf
