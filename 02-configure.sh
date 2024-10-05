@@ -7,10 +7,10 @@ source ./99-options.sh
 passwd
 
 # Configure hostname
-echo ${OPT_HOSTNAME} > /etc/hostname
+echo "$HOSTNAME" > /etc/hostname
 
 # Configure timezone
-ln -sf /usr/share/zoneinfo/${OPT_TIMEZONE} /etc/localtime
+ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc
 
 # Configure Locale
@@ -38,7 +38,7 @@ pacman --sync --noconfirm vim git curl
 bootctl install
 
 # Grab the partition UUID for the root partition
-ROOT_UUID=$(blkid -s PARTUUID -o value ${OPT_ROOT_PART})
+ROOT_UUID=$(blkid -s PARTUUID -o value "$ROOT"})
 
 # Configure the primary bootloader config
 cat <<EOF > /boot/loader/entries/arch.conf
