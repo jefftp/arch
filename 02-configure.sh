@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh -e
 
 # Load configuration options
-source ./99-options.sh
+. ./99-options.sh
 
 # Set the root password
 passwd

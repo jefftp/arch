@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/bin/sh -e
 
 INSTALL_DISK="/dev/sda"
 BOOT="${INSTALL_DISK}1"

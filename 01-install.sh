@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/sh -e
 
 # Load configuration options
-source ./99-options.sh
+. ./99-options.sh
 
 # Set the terminal font
 setfont ter-v18n
@@ -25,7 +25,6 @@ setfont ter-v18n
 sgdisk --zap-all "$INSTALL_DISK"
 sgdisk --new=1::+1G --typecode=1:ef00 --change-name=1:'EFI System Partition' "$INSTALL_DISK"
 sgdisk --new=2::-0 --typecode=2:8300 --change-name=2:'Root Partition' "$INSTALL_DISK"
-
 
 # Format BTRFS partition and mount it
 mkfs.btrfs "$ROOT"
