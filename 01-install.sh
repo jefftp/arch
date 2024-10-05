@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
 # Load configuration options
-OPT_INSTALL_DISK="/dev/sda"
-OPT_BOOT_PART="${OPT_INSTALL_DISK}1"
-OPT_ROOT_PART="${OPT_INSTALL_DISK}2"
-OPT_MOUNT_OPTIONS="compress-force=zstd:1,noatime"
-OPT_HOSTNAME="torment"
-OPT_TIMEZONE="America/Chicago"
+source ./99-options.sh
 
 # Set the terminal font
 setfont ter-v18n
@@ -27,14 +22,14 @@ setfont ter-v18n
 # | /var/cache/pacman/pkg | /dev/sda2/@pkg  |
 
 # Configure partitions
-sgdisk --zap-all "$OPT_INSTALL_DISK"
-sgdisk --new=1::+1G --typecode=1:ef00 --change-name=1:'EFI System Partition' "$OPT_INSTALL_DISK"
-sgdisk --new=2::-0 --typecode=2:8300 --change-name=2:'Root Partition' "$OPT_INSTALL_DISK"
+sgdisk --zap-all "$INSTALL_DISK"
+sgdisk --new=1::+1G --typecode=1:ef00 --change-name=1:'EFI System Partition' "$INSTALL_DISK"
+sgdisk --new=2::-0 --typecode=2:8300 --change-name=2:'Root Partition' "$INSTALL_DISK"
 
 
 # Format BTRFS partition and mount it
-mkfs.btrfs "$OPT_ROOT_PART"
-mount "$OPT_ROOT_PART" /mnt
+mkfs.btrfs "$ROOT"
+mount "$ROOT" /mnt
 
 # Create BTRFS subvolumes and umount the BTRFS partition
 btrfs subvolume create /mnt/@
@@ -45,16 +40,16 @@ btrfs subvolume create /mnt/@.snapshots
 umount /mnt
 
 # Mount BTRFS subvolumes
-mount -o "${OPT_MOUNT_OPTIONS},subvol=@" "$OPT_ROOT_PART" /mnt
+mount -o compress-force=zstd:1,noatime,subvol=@ "$ROOT" /mnt
 mkdir -p /mnt/{boot,home,var/log,var/cache/pacman/pkg,.snapshots}
-mount -o "${OPT_MOUNT_OPTIONS},subvol=@home" "$OPT_ROOT_PART" /mnt/home
-mount -o "${OPT_MOUNT_OPTIONS},subvol=@log" "$OPT_ROOT_PART" /mnt/var/log
-mount -o "${OPT_MOUNT_OPTIONS},subvol=@pkg" "$OPT_ROOT_PART" /mnt/var/cache/pacman/pkg
-mount -o "${OPT_MOUNT_OPTIONS},subvol=@home" "$OPT_ROOT_PART" /mnt/.snapshots
+mount -o compress-force=zstd:1,noatime,subvol=@home "$ROOT" /mnt/home
+mount -o compress-force=zstd:1,noatime,subvol=@log "$ROOT" /mnt/var/log
+mount -o compress-force=zstd:1,noatime,subvol=@pkg "$ROOT" /mnt/var/cache/pacman/pkg
+mount -o compress-force=zstd:1,noatime,subvol=@home "$ROOT" /mnt/.snapshots
 
 # Format and mount boot partition
-mkfs.fat -F 32 "$OPT_BOOT_PART"
-mount "$OPT_BOOT_PART" /mnt/boot
+mkfs.fat -F 32 "$BOOT"
+mount "$BOOT" /mnt/boot
 
 # Setup the mirror list
 reflector --country us --age 72 --protocol https --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist
@@ -68,8 +63,5 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Copy mirrorlist to new system
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
-# Copy the configure script to new system
-cp ./02-configure.sh /mnt/root/
-
 # Change root to the new system
-arch-chroot /mnt /root/02-configure.sh
+arch-chroot /mnt ./02-configure.sh
