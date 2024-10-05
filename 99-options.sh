@@ -7,3 +7,4 @@ ROOT="${INSTALL_DISK}2"
 HOSTNAME="torment"
 TIMEZONE="America/Chicago"
 
+CONSOLE_FONT=ter-v18n

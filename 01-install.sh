@@ -4,7 +4,7 @@
 . ./99-options.sh
 
 # Set the terminal font
-setfont ter-v18n
+setfont "$CONSOLE_FONT"
 
 # Partition Scheme
 # | Device    | filesystem | space     |
