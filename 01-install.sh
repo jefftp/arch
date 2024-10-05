@@ -39,12 +39,12 @@ btrfs subvolume create /mnt/@.snapshots
 umount /mnt
 
 # Mount BTRFS subvolumes
-mount -o compress-force=zstd:1,noatime,subvol=@ "$ROOT" /mnt
-mkdir -p /mnt/{boot,home,var/log,var/cache/pacman/pkg,.snapshots}
-mount -o compress-force=zstd:1,noatime,subvol=@home "$ROOT" /mnt/home
-mount -o compress-force=zstd:1,noatime,subvol=@log "$ROOT" /mnt/var/log
-mount -o compress-force=zstd:1,noatime,subvol=@pkg "$ROOT" /mnt/var/cache/pacman/pkg
-mount -o compress-force=zstd:1,noatime,subvol=@home "$ROOT" /mnt/.snapshots
+mount --options compress-force=zstd:1,noatime,subvol=@ "$ROOT" /mnt
+mkdir --parents /mnt/{boot,home,var/log,var/cache/pacman/pkg,.snapshots}
+mount --options compress-force=zstd:1,noatime,subvol=@home "$ROOT" /mnt/home
+mount --options compress-force=zstd:1,noatime,subvol=@log "$ROOT" /mnt/var/log
+mount --options compress-force=zstd:1,noatime,subvol=@pkg "$ROOT" /mnt/var/cache/pacman/pkg
+mount --options compress-force=zstd:1,noatime,subvol=@home "$ROOT" /mnt/.snapshots
 
 # Format and mount boot partition
 mkfs.fat -F 32 "$BOOT"
