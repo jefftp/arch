@@ -1,4 +1,7 @@
-#!/bin/sh -e
+#!/bin/sh
+
+# Exit script on error
+set -e
 
 INSTALL_DISK="/dev/sda"
 BOOT="${INSTALL_DISK}1"

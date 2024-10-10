@@ -1,10 +1,17 @@
-#!/bin/sh -e
+#!/bin/sh
+
+# Exit script on error
+set -e
 
 # Load configuration options
 . ./99-options.sh
 
 # Set the terminal font
 setfont "$CONSOLE_FONT"
+
+# Configure NTP time sync and timezone
+timedatectl set-ntp true
+timedatectl set-timezone "$TIMEZONE"
 
 # Partition Scheme
 # | Device    | filesystem | space     |
@@ -62,5 +69,8 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Copy mirrorlist to new system
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
+# Copy scripts to /mnt/root
+cp *.sh /mnt/root
+
 # Change root to the new system
-arch-chroot /mnt ./02-configure.sh
+arch-chroot /mnt /root/02-configure.sh
