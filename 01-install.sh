@@ -78,4 +78,4 @@ cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 cp *.sh /mnt/root
 
 # Change root to the new system
-arch-chroot /mnt /root/02-configure.sh
+arch-chroot /mnt ./02-configure.sh
