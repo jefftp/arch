@@ -45,6 +45,10 @@ mount "$BOOT" /mnt/boot
 # Setup the mirror list
 reflector --country us --age 72 --protocol https --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist
 
+# Enable additional pacman options in /etc/pacman.conf
+sed -i '/ParallelDownloads/s/^#//' /etc/pacman.conf
+sed -i '/Color/s/^#//' /etc/pacman.conf
+
 # Bootstrap the system
 pacstrap -K /mnt base base-devel linux linux-firmware amd-ucode terminus-font
 
