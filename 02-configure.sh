@@ -6,15 +6,12 @@ set -e
 # Load configuration options
 . /root/install/99-options.sh
 
-# Configure hostname
-echo "$HOSTNAME" > /etc/hostname
-
-# Configure NTP time sync and timezone
-timedatectl set-ntp true
-timedatectl set-timezone "$TIMEZONE"
+# Configure timezone
+ln -sf "/usr/share/zoneinfo/${TIMEZONE}"
+hwclock --systohc
 
 # Configure Locale
-sed --in-place '/^#en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
+sed --in-place '/en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
 locale-gen
 
 cat >> /etc/locale.conf << _EOF_
@@ -26,19 +23,8 @@ KEYMAP=us
 FONT="$CONSOLE_FONT"
 _EOF_
 
-# Setup networking
-pacman --sync --noconfirm networkmanager
-systemctl enable systemd-resolved.service
-systemctl enable NetworkManger.service
-
-# Setup filesystem tools
-pacman --sync --noconfirm btrfs-progs dosfstools exfatprogs e2fsprogs
-
-# Setup manual pages
-pacman --sync --noconfirm man-db man-pages
-
-# Setup basic tools
-pacman --sync --noconfirm vim git curl
+# Configure hostname
+echo "$HOSTNAME" > /etc/hostname
 
 # Install the bootloader
 bootctl install
@@ -69,3 +55,16 @@ cat > /boot/loader/loader.conf << _EOF_
 default arch
 timeout 5
 _EOF_
+
+# Setup networking
+pacman --sync --noconfirm networkmanager
+
+# Setup filesystem tools
+pacman --sync --noconfirm btrfs-progs dosfstools exfatprogs e2fsprogs
+
+# Setup manual pages
+pacman --sync --noconfirm man-db man-pages
+
+# Setup basic tools
+pacman --sync --noconfirm vim git curl less starship
+
