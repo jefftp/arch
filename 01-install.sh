@@ -63,8 +63,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # Copy mirrorlist to new system
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
-# Copy scripts to /mnt/root
-cp *.sh /mnt/root
+# Copy scripts to /mnt/root/install
+mkdir /mnt/root/install
+cp *.sh /mnt/root/install/
 
 # Change root to the new system
-arch-chroot /mnt ./02-configure.sh
+arch-chroot /mnt /root/install/02-configure.sh

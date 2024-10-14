@@ -4,7 +4,7 @@
 set -e
 
 # Load configuration options
-. ./99-options.sh
+. /root/install/99-options.sh
 
 # Configure hostname
 hostnamectl hostname "$HOSTNAME"
