@@ -7,7 +7,7 @@ set -e
 . /root/install/99-options.sh
 
 # Configure hostname
-hostnamectl hostname "$HOSTNAME"
+echo "$HOSTNAME" > /etc/hostname
 
 # Configure NTP time sync and timezone
 timedatectl set-ntp true
