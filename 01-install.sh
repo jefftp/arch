@@ -13,21 +13,6 @@ setfont "$CONSOLE_FONT"
 timedatectl set-ntp true
 timedatectl set-timezone "$TIMEZONE"
 
-# Partition Scheme
-# | Device    | filesystem | space     |
-# | --------- | ---------- | --------- |
-# | /dev/sda1 | fat32      | 1G        |
-# | /dev/sda2 | btrfs      | remaining |
-
-# Mount Scheme
-# | Mount Point           | Device          |
-# | --------------------- | --------------- |
-# | /boot                 | /dev/sda1       |
-# | /                     | /dev/sda2/@     |
-# | /home                 | /dev/sda2/@home |
-# | /var/log              | /dev/sda2/@log  |
-# | /var/cache/pacman/pkg | /dev/sda2/@pkg  |
-
 # Configure partitions
 sgdisk --zap-all "$INSTALL_DISK"
 sgdisk --new=1::+1G --typecode=1:ef00 --change-name=1:'EFI System Partition' "$INSTALL_DISK"
