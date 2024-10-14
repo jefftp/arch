@@ -1,0 +1,17 @@
+amd-ucode
+base
+base-devel
+btrfs-progs
+dosfstools
+exfatprogs
+git
+less
+linux
+linux-firmware
+man-db
+man-pages
+networkmanager
+starship
+terminus-font
+vim
+zsh

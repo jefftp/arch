@@ -50,7 +50,7 @@ sed --in-place '/ParallelDownloads/s/^#//' /etc/pacman.conf
 sed --in-place '/Color/s/^#//' /etc/pacman.conf
 
 # Bootstrap the system
-pacstrap -K /mnt base base-devel linux linux-firmware amd-ucode terminus-font
+xargs pacstrap -K /mnt < packages.txt
 
 # Patch genfstab to correctly remove option subvolid from btrfs mounts
 # when subvol option is present

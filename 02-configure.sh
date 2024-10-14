@@ -55,16 +55,3 @@ cat > /boot/loader/loader.conf << _EOF_
 default arch
 timeout 5
 _EOF_
-
-# Setup networking
-pacman --sync --noconfirm networkmanager
-
-# Setup filesystem tools
-pacman --sync --noconfirm btrfs-progs dosfstools exfatprogs e2fsprogs
-
-# Setup manual pages
-pacman --sync --noconfirm man-db man-pages
-
-# Setup basic tools
-pacman --sync --noconfirm vim git curl less starship
-
