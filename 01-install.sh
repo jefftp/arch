@@ -50,7 +50,7 @@ pacstrap -K /mnt base base-devel linux linux-firmware amd-ucode terminus-font
 
 # Patch genfstab to correctly remove option subvolid from btrfs mounts
 # when subvol option is present
-pacman -Sy patch
+pacman --sync --noconfirm patch
 patch /usr/bin/genfstab < ./patches/fix-genfstab.diff
 
 # Generate the filesystem table (fstab)
