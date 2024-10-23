@@ -40,7 +40,7 @@ mount --options compress-force=zstd:1,noatime,subvol=@.snapshots "$ROOT" /mnt/.s
 
 # Format and mount boot partition
 mkfs.fat -F 32 "$BOOT"
-mount "$BOOT" /mnt/boot
+mount --options fmask=0077,dmask=0077 "$BOOT" /mnt/boot
 
 # Setup the mirror list
 reflector --country us --age 72 --protocol https --latest 20 --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist
