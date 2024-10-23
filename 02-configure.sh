@@ -7,7 +7,7 @@ set -e
 . /root/install/99-options.sh
 
 # Configure timezone
-ln -sf "/usr/share/zoneinfo/${TIMEZONE}"
+ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc
 
 # Configure Locale
@@ -30,7 +30,7 @@ echo "$HOSTNAME" > /etc/hostname
 bootctl install
 
 # Grab the partition UUID for the root partition
-ROOT_UUID=$(blkid -s PARTUUID -o value "$ROOT"})
+ROOT_UUID=$(blkid -s PARTUUID -o value "$ROOT")
 
 # Configure the primary bootloader config
 cat > /boot/loader/entries/arch.conf << _EOF_
