@@ -55,3 +55,16 @@ cat > /boot/loader/loader.conf << _EOF_
 default arch
 timeout 5
 _EOF_
+
+# End of install reminders
+cat << _EOF_
++--------------------------------------------------------+
+|  Base installation completed.                          |
+|                                                        |
+|  Additional Steps:                                     |
+|    1. Use 'passwd' to set a password for 'root'.       |
+|    2. Reboot.                                          |
+|    3. Run '/root/install/03-post-install.sh' to run    |
+|       post-installation setup.                         |
++--------------------------------------------------------+
+_EOF_
