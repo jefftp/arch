@@ -12,8 +12,10 @@ You need to get networking up and running prior to running any of these scripts.
 
 ## Pulling scripts from GitHub
 
-`pacman -Sy git`
-`git clone https://github.com/jefftp/arch.git`
+```sh
+pacman -Sy git
+git clone https://github.com/jefftp/arch.git
+```
 
 ## Figuring out your storage devices
 
