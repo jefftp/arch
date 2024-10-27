@@ -14,6 +14,16 @@ systemctl start NetworkManager.service
 # Start NTP
 timedatectl set-ntp true
 
+# Setup ZRAM
+cat > /etc/systemd/zram-generator.conf << _EOF_
+[zram0]
+zram-size = min(ram / 2, 4096)
+compression-algorithm = zstd
+_EOF_
+
+systemctl daemon-reload
+systemctl start systemd-zram-setup@zram0.service
+
 # Setup reflector to automatically update mirrorlist
 cat > /etc/xdg/reflector/reflector.conf << _EOF_
 # Reflector configuration file for the systemd service.

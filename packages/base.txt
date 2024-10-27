@@ -30,4 +30,5 @@ unzip
 wget
 vim
 zip
+zram-generator
 zsh
