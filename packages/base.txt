@@ -20,6 +20,7 @@ neovim
 networkmanager
 openssh
 p7zip
+reflector
 rsync
 sed
 starship
