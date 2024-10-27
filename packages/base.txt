@@ -3,6 +3,7 @@ bat
 base
 base-devel
 btrfs-progs
+chezmoi
 curl
 dosfstools
 exfatprogs
