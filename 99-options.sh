@@ -7,7 +7,8 @@ INSTALL_DISK="/dev/sda"
 BOOT="${INSTALL_DISK}1"
 ROOT="${INSTALL_DISK}2"
 
-HOSTNAME="torment"
+USERNAME="archie"
+HOSTNAME="archlinux"
 TIMEZONE="America/Chicago"
 
 CONSOLE_FONT=ter-v18n

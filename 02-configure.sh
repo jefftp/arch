@@ -29,6 +29,9 @@ echo "$HOSTNAME" > /etc/hostname
 # Setup sudo to allow users in group 'wheel' to execute any command
 sed --in-place '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
 
+# Create a user with membership in wheel
+useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
+
 # Install the bootloader
 bootctl install
 
@@ -65,9 +68,11 @@ cat << _EOF_
 |  Base installation completed.                          |
 |                                                        |
 |  Additional Steps:                                     |
-|    1. Use 'passwd' to set a password for 'root'.       |
-|    2. Reboot.                                          |
-|    3. Run '/root/install/03-post-install.sh' to run    |
+|    1. Use 'passwd' to set a root password.             |
+|    2. Use 'passwd $USERNAME' to set a password for     |
+|       the $USERNAME account.                           |
+|    3. Reboot.                                          |
+|    4. Run '/root/install/03-post-install.sh' to run    |
 |       post-installation setup.                         |
 +--------------------------------------------------------+
 _EOF_
