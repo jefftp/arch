@@ -62,6 +62,10 @@ default arch
 timeout 5
 _EOF_
 
+# Setup pacman hooks to copy /boot to /.bootbackup during upgrades
+cp configs/pacman-bootbackup_pre.hook /etc/pacman.d/hooks/95-bootbackup_pre.hook
+cp configs/pacman-bootbackup_post.hook /etc/pacman.d/hooks/95-bootbackup_post.hook
+
 # End of install reminders
 cat << _EOF_
 +----------------------------------------------------------------------+
