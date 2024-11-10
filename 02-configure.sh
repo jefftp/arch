@@ -26,6 +26,9 @@ _EOF_
 # Configure hostname
 echo "$HOSTNAME" > /etc/hostname
 
+# Setup sudo to allow users in group 'wheel' to execute any command
+sed --in-place '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
+
 # Install the bootloader
 bootctl install
 
