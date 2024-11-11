@@ -24,6 +24,8 @@ p7zip
 reflector
 rsync
 sed
+snapper
+snap-pac
 starship
 terminus-font
 tmux

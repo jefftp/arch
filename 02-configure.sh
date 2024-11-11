@@ -66,6 +66,9 @@ _EOF_
 cp configs/pacman-bootbackup_pre.hook /etc/pacman.d/hooks/95-bootbackup_pre.hook
 cp configs/pacman-bootbackup_post.hook /etc/pacman.d/hooks/95-bootbackup_post.hook
 
+# Copy snapper config
+cp configs/snapper-config-root /etc/snapper/configs/root
+
 # End of install reminders
 cat << _EOF_
 +----------------------------------------------------------------------+
