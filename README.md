@@ -42,13 +42,19 @@ The script `01-install.sh` partitions a single drive based on the variable `INST
 
 ### Mount Scheme
 
-The sub-volumes for BTRFS are based on the sub-volume scheme used by the `archinstall` script. The @.snapshots sub-volume is intended to be used with `snapper` to create storage snapshots.
+The sub-volumes for BTRFS are based on the sub-volume scheme used by the *archinstall* script. The @.snapshots sub-volume is intended to be used with *snapper* to create storage snapshots.
 
-| Mount Point           | Device                |
-| --------------------- | --------------------- |
-| /boot                 | /dev/sda1             |
-| /                     | /dev/sda2/@           |
-| /home                 | /dev/sda2/@home       |
-| /var/log              | /dev/sda2/@log        |
-| /var/cache/pacman/pkg | /dev/sda2/@pkg        |
-| /.snapshots           | /dev/sda2/@.snapshots |
+| Mount Point             | Device                  |
+| ----------------------- | ----------------------- |
+| `/boot`                 | `/dev/sda1`             |
+| `/`                     | `/dev/sda2/@`           |
+| `/home`                 | `/dev/sda2/@home`       |
+| `/var/log`              | `/dev/sda2/@log`        |
+| `/var/cache/pacman/pkg` | `/dev/sda2/@pkg`        |
+| `/.snapshots`           | `/dev/sda2/@.snapshots` |
+
+### Snapper
+
+Snapper is used to create snapshots on `/` when performing *pacman* updates. This is enabled through the *snap-pac* package. Time-based snapshots are explicitly disabled. In addition, these scripts install hooks into *pacman* which rsync the contents of `/boot` to `/.bootbackup` so that kernel and initrd are captured as part of this automatic snapshot process.
+
+The goal of using *snapper* in this fashion is not backup, but protection against upgrades that need to be reverted. Additional tools will be added to provide backup.
