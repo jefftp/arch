@@ -4,7 +4,7 @@
 set -e
 
 # Load configuration options
-. /root/install/99-options.sh
+. /usr/share/install-scripts/99-options.sh
 
 # Configure timezone
 ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
@@ -61,13 +61,6 @@ cat > /boot/loader/loader.conf << _EOF_
 default arch
 timeout 5
 _EOF_
-
-# Setup pacman hooks to copy /boot to /.bootbackup during upgrades
-cp configs/pacman-bootbackup_pre.hook /etc/pacman.d/hooks/95-bootbackup_pre.hook
-cp configs/pacman-bootbackup_post.hook /etc/pacman.d/hooks/95-bootbackup_post.hook
-
-# Copy snapper config
-cp configs/snapper-config-root /etc/snapper/configs/root
 
 # End of install reminders
 cat << _EOF_

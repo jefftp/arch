@@ -55,8 +55,16 @@ xargs pacstrap -K /mnt < ./packages/base.txt
 # Generate the filesystem table (fstab)
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Copy mirrorlist to new system
+# Copy pacman configuration to new system
+cp /etc/pacman.conf /mnt/etc/pacman.conf
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
+
+# Setup pacman hooks to copy /boot to /.bootbackup during upgrades
+cp ./configs/pacman-bootbackup_pre.hook /mnt/etc/pacman.d/hooks/95-bootbackup_pre.hook
+cp ./configs/pacman-bootbackup_post.hook /mnt/etc/pacman.d/hooks/95-bootbackup_post.hook
+
+# Copy snapper config
+cp ./configs/snapper-config-root /mnt/etc/snapper/configs/root
 
 # Copy scripts to /mnt/usr/share/install-scripts/
 cp --recursive . /mnt/usr/share/install-scripts/
