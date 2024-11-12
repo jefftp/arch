@@ -62,17 +62,24 @@ default arch
 timeout 5
 _EOF_
 
+# Set the root password
+echo
+echo "Setting the password for root..."
+passwd
+
+# Set the password for the user
+echo
+echo "Setting the password for ${USERNAME}..."
+passwd "$USERNAME"
+
 # End of install reminders
 cat << _EOF_
 +----------------------------------------------------------------------+
 |  Base installation completed.                                        |
 |                                                                      |
 |  Additional Steps:                                                   |
-|    1. Use 'passwd' to set a root password.                           |
-|    2. Use 'passwd $USERNAME' to set a password for the $USERNAME     |
-|       account.                                                       |
-|    3. Reboot.                                                        |
-|    4. Run '/usr/share/install-scripts/03-post-install.sh' to run     |
+|    1. Reboot.                                                        |
+|    2. Run '/usr/share/install-scripts/03-post-install.sh' to run     |
 |       post-installation setup.                                       |
 +----------------------------------------------------------------------+
 _EOF_
