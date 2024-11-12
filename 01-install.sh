@@ -52,12 +52,6 @@ sed --in-place '/Color/s/^#//' /etc/pacman.conf
 # Bootstrap the system
 xargs pacstrap -K /mnt < ./packages/base.txt
 
-# Patch genfstab to correctly remove option subvolid from btrfs mounts
-# when subvol option is present
-# FIXED with archlinux-2024.11.01
-# pacman --sync --noconfirm patch
-# patch /usr/bin/genfstab < ./patches/fix-genfstab.diff
-
 # Generate the filesystem table (fstab)
 genfstab -U /mnt >> /mnt/etc/fstab
 
