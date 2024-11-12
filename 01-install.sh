@@ -60,6 +60,7 @@ cp /etc/pacman.conf /mnt/etc/pacman.conf
 cp /etc/pacman.d/mirrorlist /mnt/etc/pacman.d/mirrorlist
 
 # Setup pacman hooks to copy /boot to /.bootbackup during upgrades
+mkdir /mnt/etc/pacman.d/hooks
 cp ./configs/pacman-bootbackup_pre.hook /mnt/etc/pacman.d/hooks/95-bootbackup_pre.hook
 cp ./configs/pacman-bootbackup_post.hook /mnt/etc/pacman.d/hooks/95-bootbackup_post.hook
 
