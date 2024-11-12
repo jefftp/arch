@@ -4,12 +4,8 @@
 set -e
 
 # Enable network services
-systemctl enable systemd-resolved.service
-systemctl enable NetworkManager.service
-
-# Start services
-systemctl start systemd-resolved.service
-systemctl start NetworkManager.service
+systemctl enable --now systemd-resolved.service
+systemctl enable --now NetworkManager.service
 
 # Start NTP
 timedatectl set-ntp true
@@ -36,5 +32,7 @@ cat > /etc/xdg/reflector/reflector.conf << _EOF_
 --save /etc/pacman.d/mirrorlist
 _EOF_
 
-systemctl enable reflector.timer
-systemctl start reflector.timer
+systemctl enable --now reflector.timer
+
+# Enable snapper cleanup process
+systemctl enable --now snapper-cleanup.timer
