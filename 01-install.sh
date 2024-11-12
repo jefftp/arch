@@ -66,6 +66,7 @@ cp ./configs/pacman-bootbackup_post.hook /mnt/etc/pacman.d/hooks/95-bootbackup_p
 
 # Copy snapper config
 cp ./configs/snapper-config-root /mnt/etc/snapper/configs/root
+sed --in-place 's/SNAPPER_CONFIGS=""/SNAPPER_CONFIGS="root"/' /mnt/etc/conf.d/snapper
 
 # Copy scripts to /mnt/usr/share/install-scripts/
 cp --recursive . /mnt/usr/share/install-scripts/
