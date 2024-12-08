@@ -91,7 +91,7 @@ cat << _EOF_
 |                                                                      |
 |  Additional Steps:                                                   |
 |    1. Reboot.                                                        |
-|    2. Run '/usr/share/install-scripts/03-post-install.sh' to run     |
+|    2. Run '/usr/share/install-scripts/04-post-install.sh' to run     |
 |       post-installation setup.                                       |
 +----------------------------------------------------------------------+
 _EOF_
