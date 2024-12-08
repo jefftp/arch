@@ -59,6 +59,22 @@ default arch
 timeout 5
 _EOF_
 
+# Allow users in group 'wheel' to execute any command without a password
+sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^# //' /etc/sudoers
+
+# Install paru using an normal user as required by makepkg
+/usr/bin/runuser -u "$USERNAME" -- /usr/share/install-scripts/03-install-paru.sh
+
+# Limit paru to AUR packages
+sed --in-place '/AurOnly/s/^#//' /mnt/etc/paru.conf
+
+# Remove no password sudo enabled earlier
+sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^/# /' /etc/sudoers
+
+# Allow users in group 'wheel' to execute any command; with their password
+sed --in-place '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
+
+
 # Set the root password
 echo
 echo "Setting the password for root..."
