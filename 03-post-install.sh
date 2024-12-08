@@ -36,3 +36,7 @@ systemctl enable --now reflector.timer
 
 # Enable snapper cleanup process
 systemctl enable --now snapper-cleanup.timer
+
+# Allow users in group 'wheel' to execute any command; with a password
+sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^/# /' /etc/sudoers
+sed --in-place '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
