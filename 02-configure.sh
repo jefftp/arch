@@ -72,15 +72,3 @@ passwd
 echo
 echo "Setting the password for ${USERNAME}..."
 passwd "$USERNAME"
-
-# End of install reminders
-cat << _EOF_
-+----------------------------------------------------------------------+
-|  Base installation completed.                                        |
-|                                                                      |
-|  Additional Steps:                                                   |
-|    1. Reboot.                                                        |
-|    2. Run '/usr/share/install-scripts/03-post-install.sh' to run     |
-|       post-installation setup.                                       |
-+----------------------------------------------------------------------+
-_EOF_

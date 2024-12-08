@@ -74,3 +74,15 @@ cp --recursive . /mnt/usr/share/install-scripts/
 
 # Change root to the new system
 arch-chroot /mnt /usr/share/install-scripts/02-configure.sh
+
+# End of install reminders
+cat << _EOF_
++----------------------------------------------------------------------+
+|  Base installation completed.                                        |
+|                                                                      |
+|  Additional Steps:                                                   |
+|    1. Reboot.                                                        |
+|    2. Run '/usr/share/install-scripts/03-post-install.sh' to run     |
+|       post-installation setup.                                       |
++----------------------------------------------------------------------+
+_EOF_
