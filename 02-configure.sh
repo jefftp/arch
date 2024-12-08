@@ -26,10 +26,6 @@ _EOF_
 # Configure hostname
 echo "$HOSTNAME" > /etc/hostname
 
-# Allow users in group 'wheel' to execute any command without a password
-# We disable this feature in the post-install script
-sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^# //' /etc/sudoers
-
 # Create a user with membership in wheel
 useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
 

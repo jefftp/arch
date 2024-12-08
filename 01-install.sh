@@ -72,8 +72,17 @@ sed --in-place 's/SNAPPER_CONFIGS=""/SNAPPER_CONFIGS="root"/' /mnt/etc/conf.d/sn
 # Copy scripts to /mnt/usr/share/install-scripts/
 cp --recursive . /mnt/usr/share/install-scripts/
 
-# Change root to the new system
+# Allow users in group 'wheel' to execute any command without a password
+sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^# //' /mnt/etc/sudoers
+
+# Change root to the new system and execute the configure.sh script
 arch-chroot /mnt /usr/share/install-scripts/02-configure.sh
+
+# Remove no password sudo enabled earlier
+sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^/# /' /mnt/etc/sudoers
+
+# Allow users in group 'wheel' to execute any command; with their password
+sed --in-place '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /mnt/etc/sudoers
 
 # End of install reminders
 cat << _EOF_
