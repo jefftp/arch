@@ -48,6 +48,7 @@ reflector --country us --age 72 --protocol https --latest 20 --fastest 5 --sort 
 # Enable additional pacman options in /etc/pacman.conf
 sed --in-place '/ParallelDownloads/s/^#//' /etc/pacman.conf
 sed --in-place '/Color/s/^#//' /etc/pacman.conf
+sed --in-place '/VerbosePkgLists/s/^#//' /etc/pacman.conf
 
 # Bootstrap the system
 xargs pacstrap -K /mnt < ./packages/base.txt
