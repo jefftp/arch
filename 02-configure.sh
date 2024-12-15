@@ -66,7 +66,7 @@ sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^# //' /etc/sudoers
 /usr/bin/runuser -u "$USERNAME" -- /usr/share/install-scripts/03-install-paru.sh
 
 # Limit paru to AUR packages
-sed --in-place '/AurOnly/s/^#//' /mnt/etc/paru.conf
+sed --in-place '/AurOnly/s/^#//' /etc/paru.conf
 
 # Remove no password sudo enabled earlier
 sed --in-place '/%wheel ALL=(ALL:ALL) NOPASSWD: ALL/s/^/# /' /etc/sudoers
