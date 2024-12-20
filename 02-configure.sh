@@ -37,7 +37,7 @@ ROOT_UUID=$(blkid -s PARTUUID -o value "$ROOT")
 
 # Configure the primary bootloader config
 cat > /boot/loader/entries/arch.conf << _EOF_
-title Arch Linux
+title Arch Linux (linux-zen)
 linux /vmlinuz-linux-zen
 initrd /amd-ucode.img
 initrd /initramfs-linux-zen.img
@@ -46,7 +46,7 @@ _EOF_
 
 # Configure the fallback bootloader config
 cat > /boot/loader/entries/arch-fallback.conf << _EOF_
-title Arch Linux Fallback
+title Arch Linux Fallback (linux-zen)
 linux /vmlinuz-linux-zen
 initrd /amd-ucode.img
 initrd /initramfs-linux-zen-fallback.img
