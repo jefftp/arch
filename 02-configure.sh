@@ -26,6 +26,11 @@ _EOF_
 # Configure hostname
 echo "$HOSTNAME" > /etc/hostname
 
+# Install additional packages
+xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/utils.txt
+xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/graphics.txt
+xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/desktop.txt
+
 # Create a user with membership in wheel
 useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
 
