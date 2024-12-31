@@ -20,6 +20,9 @@ _EOF_
 systemctl daemon-reload
 systemctl start systemd-zram-setup@zram0.service
 
+# Start SDDM for a graphical login on boot
+systemctl enable sddm.service
+
 # Setup reflector to automatically update mirrorlist
 cat > /etc/xdg/reflector/reflector.conf << _EOF_
 # Reflector configuration file for the systemd service.
