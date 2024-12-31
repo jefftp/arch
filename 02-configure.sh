@@ -26,8 +26,17 @@ _EOF_
 # Configure hostname
 echo "$HOSTNAME" > /etc/hostname
 
-# Install additional packages
-xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/utils.txt
+# Install essential commandline utilities
+pacman --sync --refresh --noconfirm \
+ bat less \
+ curl wget rsync openssh \
+ man-db man-pages \
+ lsd fzf starship tmux \
+ fastfetch htop \
+ chezmoi \
+ unrar unzip zip 7zip \
+ neovim vim
+
 xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/graphics.txt
 xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/desktop.txt
 
