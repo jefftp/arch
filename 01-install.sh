@@ -51,7 +51,16 @@ sed --in-place '/Color/s/^#//' /etc/pacman.conf
 sed --in-place '/VerbosePkgLists/s/^#//' /etc/pacman.conf
 
 # Bootstrap the system
-xargs pacstrap -K /mnt < ./packages/base.txt
+pacstrap -K /mnt base base-devel \
+ linux-zen linux-firmware \
+ amd-ucode \
+ terminus-font \
+ btrfs-progs dosfstools exfatprogs \
+ iwd networkmanager \
+ git sed zsh \
+ reflector \
+ snapper snap-pac \
+ zram-generator
 
 # Generate the filesystem table (fstab)
 genfstab -U /mnt >> /mnt/etc/fstab
