@@ -37,7 +37,10 @@ pacman --sync --refresh --noconfirm \
  unrar unzip zip 7zip \
  neovim vim
 
-xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/graphics.txt
+# Install GPU drivers and tools
+pacman --sync --refresh --noconfirm \
+ dkms nvidia-open-dkms nvidia-settings nvidia-utils
+
 xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/desktop.txt
 
 # Create a user with membership in wheel
