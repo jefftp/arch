@@ -41,7 +41,12 @@ pacman --sync --refresh --noconfirm \
 pacman --sync --refresh --noconfirm \
  dkms nvidia-open-dkms nvidia-settings nvidia-utils
 
-xargs pacman --sync --refresh --noconfirm < /usr/share/install-scripts/packages/desktop.txt
+# Install desktop environment and tools
+pacman --sync --refresh --noconfirm \
+ plasma sddm \
+ pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
+ noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
+ ark dolphin kcalc ghostty 
 
 # Create a user with membership in wheel
 useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
