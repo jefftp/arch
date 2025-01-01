@@ -26,6 +26,9 @@ _EOF_
 # Configure hostname
 echo "$HOSTNAME" > /etc/hostname
 
+# Enable the multilib repository
+sed --in-place "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+
 # Install essential commandline utilities
 pacman --sync --refresh --noconfirm \
  bat less \
@@ -39,14 +42,14 @@ pacman --sync --refresh --noconfirm \
 
 # Install GPU drivers and tools
 pacman --sync --refresh --noconfirm \
- dkms nvidia-open-dkms nvidia-settings nvidia-utils
+ dkms nvidia-open-dkms nvidia-settings nvidia-utils lib32-nvidia-utils
 
 # Install desktop environment and tools
 pacman --sync --refresh --noconfirm \
  plasma sddm \
  pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
  noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
- ark dolphin kcalc ghostty 
+ ark dolphin kcalc ghostty steam
 
 # Create a user with membership in wheel
 useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
