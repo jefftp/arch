@@ -35,8 +35,8 @@ pacman --sync --refresh --noconfirm \
  curl wget rsync openssh \
  man-db man-pages \
  lsd fzf starship tmux \
- fastfetch htop \
- chezmoi \
+ fastfetch btop \
+ chezmoi restic \
  unrar unzip zip 7zip \
  neovim vim
 
