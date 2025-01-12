@@ -3,6 +3,12 @@
 # Exit on script error
 set -e
 
+# Make sure we're running as root
+if ! [ $(id -u) = 0 ]; then
+  echo 'ERROR: This script requires root permissions.'
+  exit 1
+fi
+
 # Enable network services
 systemctl enable --now systemd-resolved.service
 systemctl enable --now NetworkManager.service
