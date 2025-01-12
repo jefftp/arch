@@ -24,14 +24,14 @@ systemctl start systemd-zram-setup@zram0.service
 systemctl enable sddm.service
 
 # Configure SDDM display server as Wayland
-cat > /etc/sddm.conf.d/10-wayland.conf <_EOF_
-[General]
-DisplayServer=wayland
-GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
-
-[Wayland]
-CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
-_EOF_
+#cat > /etc/sddm.conf.d/10-wayland.conf <_EOF_
+#[General]
+#DisplayServer=wayland
+#GreeterEnvironment=QT_WAYLAND_SHELL_INTEGRATION=layer-shell
+#
+#[Wayland]
+#CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
+#_EOF_
 
 # Setup reflector to automatically update mirrorlist
 cat > /etc/xdg/reflector/reflector.conf << _EOF_
