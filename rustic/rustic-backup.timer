@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Rustic Backup
+
+[Timer]
+OnCalendar=*-*-* 02:00:00
+Unit=rustic-backup.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
