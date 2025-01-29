@@ -36,7 +36,7 @@ pacman --sync --refresh --noconfirm \
  man-db man-pages \
  lsd fzf starship tmux \
  fastfetch btop \
- chezmoi restic \
+ chezmoi rustic \
  unrar unzip zip 7zip \
  neovim vim
 
@@ -49,7 +49,7 @@ pacman --sync --refresh --noconfirm \
  plasma sddm \
  pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
  noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
- ark dolphin kcalc ghostty firefox steam
+ ark dolphin kcalc kitty firefox steam
 
 # Create a user with membership in wheel
 useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
