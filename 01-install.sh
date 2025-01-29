@@ -93,5 +93,7 @@ cat << _EOF_
 |    1. Reboot.                                                        |
 |    2. Run '/usr/share/install-scripts/03-post-install.sh' to run     |
 |       post-installation setup.                                       |
+|    3. Want to configure backups to a local NAS? Edit and then run:   |
+|       '/usr/share/install-scripts/rustic/setup-rustic.sh'.           |
 +----------------------------------------------------------------------+
 _EOF_
