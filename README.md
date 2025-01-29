@@ -58,3 +58,9 @@ The sub-volumes for BTRFS are based on the sub-volume scheme used by the *archin
 Snapper is used to create snapshots on `/` when performing *pacman* updates. This is enabled through the *snap-pac* package. Time-based snapshots are explicitly disabled. In addition, these scripts install hooks into *pacman* which rsync the contents of `/boot` to `/.bootbackup` so that kernel and initrd are captured as part of this automatic snapshot process.
 
 The goal of using *snapper* in this fashion is not backup, but protection against upgrades that need to be reverted. Additional tools will be added to provide backup.
+
+### Rustic
+
+Rustic is used for daily backups to a local NAS over SMB. Because the whole system can be reinstalled using these scripts, I'm only backing up `/home`, `/root`, and `/etc`.
+
+I selected Rustic because even though it might be in beta, I think it has the most complete feature-set of the various open source tools I reviewed (borg, restic, and rustic).
