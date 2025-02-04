@@ -19,10 +19,6 @@ umask 077
 # Create config and repo mount point directories
 mkdir /etc/rustic "$BACKUP_MOUNTPOINT"
 
-# Copy the Rustic configuration profile and set permissions
-cp rustic.toml /etc/rustic/
-chmod 600 /etc/rustic/rustic.toml
-
 # Create the SMB credential file
 cat > /etc/rustic/smb-credentials <<_EOF_
 username=${SMB_USERNAME}
@@ -31,6 +27,9 @@ _EOF_
 
 # Create a random 32 character password for the backup repo password
 cat /dev/urandom | tr -dc [:alnum:] | head -c32 > /etc/rustic/repo-credentials
+
+# Create rustic configuration file
+( ./gen-rustic-config.sh ) > /etc/rustic/rustic.toml
 
 # Convert $BACKUP_MOUNTPATH to BACKUP_SYSTEMD_UNIT
 if [ -z "$BACKUP_MOUNTPATH" ] || [ "${BACKUP_MOUNTPATH#/}" = "$BACKUP_MOUNTPATH"]; then
