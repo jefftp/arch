@@ -64,6 +64,6 @@ cat << _EOF_
 |                                                                      |
 |  Want to configure backups to a local NAS?                           |
 |    1. Edit '/usr/share/install-scripts/rustic/options.conf'.         |
-|    2. Run '/usr/share/install-scripts/setup-rustic.sh'.              |
+|    2. Run '/usr/share/install-scripts/rustic/setup-rustic.sh'.       |
 +----------------------------------------------------------------------+
 _EOF_
