@@ -4,7 +4,7 @@
 set -e
 
 # Load configuration options
-. /usr/share/install-scripts/99-options.sh
+. /usr/share/install-scripts/options.conf
 
 # Configure timezone
 ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime

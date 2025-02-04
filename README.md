@@ -6,7 +6,7 @@ I consider these scripts useful for intermediate linux users who want more contr
 
 If you use these scripts as part of your installation automation adventure, I'd appreciate seeing what changes you made. I might find them useful! There's no requirements to share credit or changes, but I'd appreciate either.
 
-Options can be configured in the `99-options.sh` file, which is sourced by the other scripts.
+Options can be configured in the `options.conf` file, which is sourced by the other scripts.
 
 You need to get networking up and running prior to running any of these scripts.
 
@@ -23,7 +23,7 @@ Use `lsblk` to list block devices on the system. The device name will be prefixe
 
 ## Running the installation scripts
 
-First, update the variables in `99-options.sh` to change any options such as the install disk or timezone.
+First, update the variables in `options.conf` to change any options such as the install disk or timezone.
 
 Next run `01-install.sh`. This will call `02-configure.sh` as part of the installation.
 
@@ -33,7 +33,7 @@ Once the installation completes successfully, you'll get a reminder to set a roo
 
 ### Partition Scheme
 
-The script `01-install.sh` partitions a single drive based on the variable `INSTALL_DISK` in the script `99-options.sh`.
+The script `01-install.sh` partitions a single drive based on the variable `INSTALL_DISK` in the script `options.conf`.
 
 | Device    | filesystem | space     |
 | --------- | ---------- | --------- |

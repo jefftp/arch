@@ -4,7 +4,7 @@
 set -e
 
 # Load configuration options
-. ./99-options.sh
+. ./options.conf
 
 # Set the terminal font
 setfont "$CONSOLE_FONT"
