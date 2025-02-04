@@ -6,7 +6,7 @@ set -e
 # Load options
 . ./options.conf
 
-# Create the Rustic configuration profile
+# Create the rustic configuration profile
 cat <<_EOF_
 [global]
 log-level = "info"

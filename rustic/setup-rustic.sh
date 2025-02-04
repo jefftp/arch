@@ -37,39 +37,13 @@ if [ -z "$BACKUP_MOUNTPATH" ] || [ "${BACKUP_MOUNTPATH#/}" = "$BACKUP_MOUNTPATH"
   exit 1
 fi
 
-# Remove the leading / from the mount path
+# Remove the leading / from the mount path, and then convert "/" to "-"
 BACKUP_SYSTEMD_UNIT="${BACKUP_MOUNTPATH#/}"
-
-# Convert / to -
 BACKUP_SYSTEMD_UNIT=$(echo "$BACKUP_SYSTEMD_UNIT" | tr '/' '-')
 
-# Create .mount file for backup repo
-cat > "/etc/systemd/system/${BACKUP_SYSTEMD_UNIT}.mount" <<_EOF_
-[Unit]
-Description=Backup Repository
-After=network-online.target
-Wants=network-online.target
-
-[Mount]
-What=${SMB_PATH}
-Where=${BACKUP_MOUNTPOINT}
-Type=cifs
-Options=credentials=/etc/rustic/smb-credentials,vers=3,nosuid,nodev,noexec,noatime,file_mode=0600,dir_mode=0700,iocharset=utf8
-TimeoutSec=30
-
-[Install]
-WantedBy=multi-user.target
-_EOF_
-
-# Create .automount file for backup repo
-cat > "/etc/systemd/system/${BACKUP_SYSTEMD_UNIT}.automount" <<_EOF_
-[Unit]
-Description=Automount Backup Repository
-
-[Automount]
-Where=${BACKUP_MOUNTPOINT}
-TimeoutIdleSec=5min
-_EOF_
+# Create .mount and .automount unit files for backup repo
+( ./gen-mount-unit.sh ) > "/etc/systemd/system/${BACKUP_SYSTEMD_UNIT}.mount"
+( ./gen-automount-unit.sh ) > "/etc/systemd/system/${BACKUP_SYSTEMD_UNIT}.automount"
 
 # Copy service and timer unit files into place and set permissions
 cp rustic-backup.{service,timer} /etc/systemd/system
