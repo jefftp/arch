@@ -55,3 +55,15 @@ systemctl enable --now reflector.timer
 
 # Enable snapper cleanup process
 systemctl enable --now snapper-cleanup.timer
+
+
+# End of install reminders
+cat << _EOF_
++----------------------------------------------------------------------+
+|  Post installation tasks completed.                                  |
+|                                                                      |
+|  Want to configure backups to a local NAS?                           |
+|    1. Edit '/usr/share/install-scripts/rustic/options.conf'.         |
+|    2. Run '/usr/share/install-scripts/setup-rustic.sh'.              |
++----------------------------------------------------------------------+
+_EOF_
