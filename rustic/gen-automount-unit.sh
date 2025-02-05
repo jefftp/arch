@@ -14,4 +14,7 @@ Description=Automount Backup Repository
 [Automount]
 Where=${BACKUP_MOUNTPOINT}
 TimeoutIdleSec=5min
+
+[Install]
+WantedBy=multi-user.target
 _EOF_

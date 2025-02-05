@@ -13,6 +13,12 @@ fi
 # Load options
 . ./options.conf
 
+# Make sure we have an absolute path for the backup mount point
+if [ -z "$BACKUP_MOUNTPOINT" ] || [ "${BACKUP_MOUNTPOINT#/}" = "$BACKUP_MOUNTPOINT" ]; then
+  echo "ERROR: BACKUP_MOUNTPOINT must be an absolute path." >&2
+  exit 1
+fi
+
 # Set permissions for new files so they are only accessible by root
 umask 077
 
@@ -31,14 +37,8 @@ cat /dev/urandom | tr -dc [:alnum:] | head -c32 > /etc/rustic/repo-credentials
 # Create rustic configuration file
 ( ./gen-rustic-config.sh ) > /etc/rustic/rustic.toml
 
-# Convert $BACKUP_MOUNTPATH to BACKUP_SYSTEMD_UNIT
-if [ -z "$BACKUP_MOUNTPATH" ] || [ "${BACKUP_MOUNTPATH#/}" = "$BACKUP_MOUNTPATH"]; then
-  echo "ERROR: BACKUP_MOUNTPATH must be an absolute path." >&2
-  exit 1
-fi
-
 # Remove the leading / from the mount path, and then convert "/" to "-"
-BACKUP_SYSTEMD_UNIT="${BACKUP_MOUNTPATH#/}"
+BACKUP_SYSTEMD_UNIT="${BACKUP_MOUNTPOINT#/}"
 BACKUP_SYSTEMD_UNIT=$(echo "$BACKUP_SYSTEMD_UNIT" | tr '/' '-')
 
 # Create .mount and .automount unit files for backup repo
@@ -49,9 +49,11 @@ BACKUP_SYSTEMD_UNIT=$(echo "$BACKUP_SYSTEMD_UNIT" | tr '/' '-')
 cp rustic-backup.{service,timer} /etc/systemd/system
 chmod 644 /etc/systemd/system/rustic-backup.{service,timer}
 
-# Reload the systemd config and remote-fs.target to load changes to fstab
+# Reload the systemd config
 systemctl daemon-reload
-systemctl reload remote-fs.target
+
+# Enable and start the automount unit
+systemctl enable --now "${BACKUP_SYSTEMD_UNIT}.automount"
 
 # Initialize the backup repo
 rustic init
