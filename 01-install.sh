@@ -52,7 +52,7 @@ sed --in-place '/VerbosePkgLists/s/^#//' /etc/pacman.conf
 
 # Bootstrap the system
 pacstrap -K /mnt base base-devel \
- linux-zen linux-firmware \
+ linux-zen linux-zen-headers linux-firmware \
  amd-ucode \
  terminus-font \
  btrfs-progs dosfstools exfatprogs \
