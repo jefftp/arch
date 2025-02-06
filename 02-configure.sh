@@ -53,7 +53,7 @@ pacman --sync --refresh --noconfirm \
  gamemode lib32-gamemode
 
 # Create a user with membership in wheel
-useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
+useradd --create-home --groups wheel,gamemode --shell /usr/bin/zsh "$USERNAME"
 
 # Allow users in group 'wheel' to execute any command; with their password
 sed --in-place '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
