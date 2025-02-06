@@ -49,7 +49,8 @@ pacman --sync --refresh --noconfirm \
  plasma sddm \
  pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
  noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
- ark dolphin kcalc kitty firefox steam
+ ark dolphin kcalc kitty firefox steam \
+ gamemode lib32-gamemode
 
 # Create a user with membership in wheel
 useradd --create-home --groups wheel --shell /usr/bin/zsh "$USERNAME"
