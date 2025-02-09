@@ -50,7 +50,8 @@ pacman --sync --refresh --noconfirm \
  pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
  noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
  ark dolphin kcalc kitty firefox steam \
- gamemode lib32-gamemode
+ gamemode lib32-gamemode \
+ fuse2
 
 # Create a user with membership in wheel
 useradd --create-home --groups wheel,gamemode --shell /usr/bin/zsh "$USERNAME"
