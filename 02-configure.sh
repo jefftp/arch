@@ -34,7 +34,7 @@ pacman --sync --refresh --noconfirm \
  bat less \
  curl wget rsync openssh \
  man-db man-pages \
- lsd fzf starship tmux \
+ lsd fd fzf starship tmux \
  fastfetch btop \
  chezmoi rustic \
  unrar unzip zip 7zip \
