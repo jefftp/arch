@@ -26,6 +26,18 @@ _EOF_
 # Configure hostname
 echo "$HOSTNAME" > /etc/hostname
 
+# Add sysctl settings
+cat > /etc/sysctl.d/80-networking.conf << _EOF_
+net.core.default_qdisc=fq
+net.ipv4.tcp_congestion_control=bbr
+net.ipv4.tcp_mtu_probing=1
+_EOF_
+
+cat > /etc/sysctl.d/90-gaming.conf << _EOF_
+kernel.split_lock_mitigate=0
+vm.max_map_count=2147483642
+_EOF_
+
 # Enable the multilib repository
 sed --in-place "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
