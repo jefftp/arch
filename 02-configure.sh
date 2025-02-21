@@ -50,7 +50,8 @@ pacman --sync --refresh --noconfirm \
  fastfetch btop \
  chezmoi rustic \
  unrar unzip zip 7zip \
- neovim vim
+ neovim vim \
+ uv
 
 # Install GPU drivers and tools
 pacman --sync --refresh --noconfirm \
