@@ -17,7 +17,7 @@ systemctl enable --now NetworkManager.service
 timedatectl set-ntp true
 
 # Setup ZRAM
-cat > /etc/systemd/zram-generator.conf << _EOF_
+cat >/etc/systemd/zram-generator.conf <<_EOF_
 [zram0]
 zram-size = min(ram / 2, 4096)
 compression-algorithm = zstd
@@ -39,8 +39,11 @@ systemctl enable sddm.service
 #CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
 #_EOF_
 
+# Setup print service
+systemctl enable --now cups.service
+
 # Setup reflector to automatically update mirrorlist
-cat > /etc/xdg/reflector/reflector.conf << _EOF_
+cat >/etc/xdg/reflector/reflector.conf <<_EOF_
 # Reflector configuration file for the systemd service.
 --country us
 --age 72
@@ -56,9 +59,8 @@ systemctl enable --now reflector.timer
 # Enable snapper cleanup process
 systemctl enable --now snapper-cleanup.timer
 
-
 # End of install reminders
-cat << _EOF_
+cat <<_EOF_
 +----------------------------------------------------------------------+
 |  Post installation tasks completed.                                  |
 |                                                                      |
