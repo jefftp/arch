@@ -39,6 +39,9 @@ systemctl enable sddm.service
 #CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
 #_EOF_
 
+# Startup Avahi daemon for MDNS service discovery
+systemctl enable --now avahi-daemon.service
+
 # Setup print service
 systemctl enable --now cups.service
 
