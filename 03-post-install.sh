@@ -39,6 +39,9 @@ systemctl enable sddm.service
 #CompositorCommand=kwin_wayland --drm --no-lockscreen --no-global-shortcuts --locale1
 #_EOF_
 
+# Startup bluetooth services
+systemctl enable --now bluetooth.service
+
 # Startup Avahi daemon for MDNS service discovery
 systemctl enable --now avahi-daemon.service
 

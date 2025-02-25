@@ -63,6 +63,7 @@ pacman --sync --refresh --noconfirm \
   pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
   noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
   ark dolphin kcalc kitty firefox steam \
+  bluez bluez-utils \
   cups system-config-printer \
   gamemode lib32-gamemode \
   fuse2
