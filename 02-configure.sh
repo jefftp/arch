@@ -62,7 +62,7 @@ pacman --sync --refresh --noconfirm \
   plasma sddm \
   pipewire pipewire-alsa pipewire-audio pipewire-jack pipewire-pulse wireplumber \
   noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
-  ark dolphin kcalc kitty firefox steam \
+  ark dolphin filelight kcalc kitty firefox steam \
   bluez bluez-utils \
   okular cups system-config-printer \
   gamemode lib32-gamemode \
