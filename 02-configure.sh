@@ -64,7 +64,7 @@ pacman --sync --refresh --noconfirm \
   noto-fonts-emoji ttf-dejavu ttf-inconsolata-nerd \
   ark dolphin kcalc kitty firefox steam \
   bluez bluez-utils \
-  cups system-config-printer \
+  okular cups system-config-printer \
   gamemode lib32-gamemode \
   fuse2
 
